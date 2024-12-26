@@ -61,6 +61,7 @@ mod tests {
 1   3
 3   9
 3   3";
+
     assert_eq!(part_one(input), 11);
   }
 
