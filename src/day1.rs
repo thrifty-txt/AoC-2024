@@ -2,22 +2,22 @@ use std::collections::HashMap;
 
 use itertools::Itertools;
 
-fn input_to_two_lists(input: &str) -> (Vec<i32>, Vec<i32>) {
+fn input_to_two_lists(input: &str) -> (Vec<u32>, Vec<u32>) {
   input.lines()
     .filter_map(|line| 
       line
         .split_whitespace()
         .filter(|substring| !substring.is_empty())
         .filter_map(|substring| substring
-          .parse::<i32>()
+          .parse::<u32>()
           .ok()
         )
-        .collect_tuple::<(i32, i32)>()
+        .collect_tuple::<(_, _)>()
     )
     .unzip()
 }
 
-pub fn part_one(input: &str) -> i32 {
+pub fn part_one(input: &str) -> u32 {
   let (mut first, mut second) = input_to_two_lists(input);
   first.sort_unstable();
   second.sort_unstable();
@@ -26,13 +26,13 @@ pub fn part_one(input: &str) -> i32 {
     .into_iter()
     .zip_eq(second)
     .map(|(l, r)|
-      (l - r).abs()
+      l.abs_diff(r)
     )
     .sum();
   sum
 }
 
-pub fn part_two(input: &str) -> i32 {
+pub fn part_two(input: &str) -> u32 {
   let (first, second) = input_to_two_lists(input);
 
   let map = second.into_iter()
