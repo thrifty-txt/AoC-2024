@@ -13,8 +13,8 @@ fn main() {
         .expect("Unable to read file!");
 
     let solution = match day.as_str(){
-       "1.1" =>  day1::part_one(&input).to_string(),
-       "1.2" => "".to_owned(),
+       "1.1" => day1::part_one(&input).to_string(),
+       "1.2" => day1::part_two(&input).to_string(),
        _ => panic!("Unknown day parameter!")
     };
 
