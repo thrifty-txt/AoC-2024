@@ -1,7 +1,7 @@
 use itertools::Itertools;
 
-pub fn part_one(input: &str) -> i32 {
-  let (mut first, mut second): (Vec<_>, Vec<_>) = input.lines()
+fn input_to_two_lists(input: &str) -> (Vec<i32>, Vec<i32>) {
+  input.lines()
     .filter_map(|line| 
       line
         .split_whitespace()
@@ -12,22 +12,26 @@ pub fn part_one(input: &str) -> i32 {
         )
         .collect_tuple::<(i32, i32)>()
     )
-    .unzip();
+    .unzip()
+}
 
+pub fn part_one(input: &str) -> i32 {
+  let (mut first, mut second) = input_to_two_lists(input);
   first.sort_unstable();
   second.sort_unstable();
 
-  first
+  let sum = first
     .into_iter()
     .zip_eq(second)
     .map(|(l, r)|
       (l - r).abs()
     )
-    .sum()
+    .sum();
+  sum
 }
 
-pub fn part_two(){
-
+pub fn part_two(input: &str) -> i32 {
+  0
 }
 
 #[cfg(test)]
